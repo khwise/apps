@@ -1,0 +1,20 @@
+server:
+  port: 8000
+config:
+  hikari:
+    jdbc-url: jdbc:mysql://localhost:3306/quiz?characterEncoding=utf8&useSSL=false&autoReconnection=true
+    username: hope
+    password: 1234
+    connection-timeout: 250000
+    idle-timeout: 250000
+    max-lifeitme: 250000
+    connection-test-query: select 1
+    minium-idle: 1
+    maximum-pool-size: 10
+    poll-name: hikaricp-connections
+    validation-timeout: 250000
+  hibernate:
+    hibernate.hbm2ddl.auto: none
+    hibernate.show-sql: true
+    hibernate.format_sql: true
+    hibernate.dialect: org.hibernate.dialect.MySQL5Dialect
