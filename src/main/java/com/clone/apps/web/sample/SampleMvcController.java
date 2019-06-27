@@ -3,7 +3,7 @@ package com.clone.apps.web.sample;
 import com.clone.apps.business.sample.SampleService;
 import com.clone.apps.global.response.DefaultResponse;
 import com.clone.apps.global.response.SuccessCode;
-import com.clone.apps.persistence.entity.Sample;
+import com.clone.apps.persistence.entity.sample.Sample;
 import com.clone.apps.web.BaseWebController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

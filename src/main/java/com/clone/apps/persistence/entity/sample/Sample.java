@@ -1,4 +1,4 @@
-package com.clone.apps.persistence.entity;
+package com.clone.apps.persistence.entity.sample;
 
 import lombok.Data;
 

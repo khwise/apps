@@ -1,6 +1,6 @@
 package com.clone.apps.business.sample;
 
-import com.clone.apps.persistence.entity.Sample;
+import com.clone.apps.persistence.entity.sample.Sample;
 
 import java.util.List;
 

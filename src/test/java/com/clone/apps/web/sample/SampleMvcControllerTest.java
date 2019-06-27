@@ -1,7 +1,7 @@
 package com.clone.apps.web.sample;
 
 import com.clone.apps.business.sample.SampleService;
-import com.clone.apps.persistence.entity.Sample;
+import com.clone.apps.persistence.entity.sample.Sample;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
 import org.junit.Test;
