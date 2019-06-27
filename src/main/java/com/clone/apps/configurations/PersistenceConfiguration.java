@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.domain.AuditorAware;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
@@ -19,6 +20,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 /**
  * Created by kh.jin on 2019. 6. 26.
@@ -70,6 +72,20 @@ public class PersistenceConfiguration {
         JpaTransactionManager tm = new JpaTransactionManager();
         tm.setEntityManagerFactory(em);
         return tm;
+    }
+
+    @Bean
+    public AuditorAware<Long> auditorAware() {
+        return new AuditorAwareImpl();
+    }
+
+    public class AuditorAwareImpl implements AuditorAware<Long> {
+        private Long auditor = 10000L;
+
+        @Override
+        public Optional<Long> getCurrentAuditor() {
+            return Optional.of(auditor);
+        }
     }
 
 }
