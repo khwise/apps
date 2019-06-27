@@ -4,12 +4,14 @@ import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.data.domain.AuditorAware;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
@@ -17,7 +19,6 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.persistence.EntityManagerFactory;
-import javax.sql.DataSource;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -30,15 +31,16 @@ import java.util.Optional;
  */
 
 @EnableTransactionManagement
+@EnableJpaAuditing
 @Configuration
 public class PersistenceConfiguration {
     private final Logger log = LoggerFactory.getLogger(PersistenceConfiguration.class);
 
-    @Autowired
-    @Bean("dataSource")
-    public HikariDataSource hikariDataSource(@Qualifier("hikariConfig") HikariConfig config) {
-        log.info("HikariDataSource. config : {}", config.getJdbcUrl());
-        return new HikariDataSource(config);
+    @Bean(name = "dataSource")
+    @Primary
+    @ConfigurationProperties("spring.datasource.hikari")
+    public HikariDataSource dataSource() {
+        return DataSourceBuilder.create().type(HikariDataSource.class).build();
     }
 
     @ConfigurationProperties(prefix = "config.hikari")
@@ -49,22 +51,19 @@ public class PersistenceConfiguration {
     }
 
     @Bean(name = "entityManagerFactory")
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory (
-            @Qualifier("dataSource") DataSource dataSource,
-            @Qualifier("hibernateProperty") Map<String,String> hibernateProperty) {
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory () {
         LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
-        em.setDataSource(dataSource);
+        em.setDataSource(dataSource());
         em.setPackagesToScan("com.clone.apps.persistence");
         em.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
-        em.setJpaPropertyMap(hibernateProperty);
-        return em;
-    }
 
-    @ConfigurationProperties(prefix = "config.hibernate")
-    @Bean(name = "hibernateProperty")
-    public Map<String,String> hibernateProperty() {
-        log.info("hibernateProperty");
-        return new HashMap<>();
+        Map<String, String> properties = new HashMap<>();
+        properties.put("hibernate.hbm2ddl.auto", "none");
+        properties.put("hibernate.show-sql", "true");
+        properties.put("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
+
+        em.setJpaPropertyMap(properties);
+        return em;
     }
 
     @Bean(name = "transactionManager")

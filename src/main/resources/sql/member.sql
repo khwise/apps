@@ -2,7 +2,7 @@
  * TB_MEMBER (회원정보)
  */
 CREATE TABLE quiz.tb_member (
-  member_no INT(10) UNSIGNED NOT NULL,
+  member_no INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   id VARCHAR(45) NOT NULL,
   password CHAR(32) NOT NULL,
   status TINYINT(4) NOT NULL DEFAULT 1,

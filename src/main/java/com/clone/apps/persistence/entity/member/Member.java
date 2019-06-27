@@ -1,6 +1,7 @@
 package com.clone.apps.persistence.entity.member;
 
 import com.clone.apps.global.codes.MemberStatusCode;
+import com.clone.apps.persistence.convert.MemberStatusCodeConverter;
 import com.clone.apps.persistence.entity.Auditable;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -36,15 +37,15 @@ public class Member extends Auditable<Long> {
     @NotBlank
     private String password;
 
-    @Convert(converter = MemberStatusCode.class)
+    @Convert(converter = MemberStatusCodeConverter.class)
     @Column(name = "status")
-    @NotBlank
+    @NotNull
     private MemberStatusCode status;
 
     @Column(name = "login_failed_cnt")
     @NotNull
     private Integer loginFailedCount;
 
-    @Column(name = "last_password_changed_date")
+    @Column(name = "last_pwd_changed_date")
     private LocalDate lastPasswordChangedDate;
 }
