@@ -9,10 +9,12 @@ import com.clone.apps.web.BaseWebController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDate;
+import java.util.List;
 
 /**
  * Created by kh.jin on 2019. 6. 27.
@@ -42,5 +44,11 @@ public class MemberController implements BaseWebController {
         );
 
         return DefaultResponse.success(SuccessCode.CREATED, member);
+    }
+
+    @GetMapping("/members")
+    public DefaultResponse<List<Member>> getMembers() {
+        List<Member> members = memberRepositoryService.getMembers();
+        return DefaultResponse.success(SuccessCode.FIND_LIST, members);
     }
 }

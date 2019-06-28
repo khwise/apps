@@ -1,6 +1,7 @@
 package com.clone.apps.persistence;
 
 import com.clone.apps.persistence.entity.member.Member;
+import com.clone.apps.persistence.mapper.MemberMapper;
 import com.clone.apps.persistence.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -17,11 +18,14 @@ import java.util.List;
 @Component
 public class MemberRepositoryServiceImpl implements MemberRepositoryService {
 
-    final private MemberRepository repository;
+    private final MemberRepository repository;
+
+    private MemberMapper mapper;
 
     @Autowired
-    public MemberRepositoryServiceImpl(MemberRepository repository) {
+    public MemberRepositoryServiceImpl(MemberRepository repository, MemberMapper mapper) {
         this.repository = repository;
+        this.mapper = mapper;
     }
 
     @Override
@@ -47,5 +51,10 @@ public class MemberRepositoryServiceImpl implements MemberRepositoryService {
     @Override
     public void delete(Long id) {
         repository.deleteById(id);
+    }
+
+    @Override
+    public List<Member> getMembers() {
+        return mapper.selectMembers();
     }
 }

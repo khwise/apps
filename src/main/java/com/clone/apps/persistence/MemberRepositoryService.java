@@ -19,4 +19,6 @@ public interface MemberRepositoryService {
     Member update(Member member);
 
     void delete(Long id);
+
+    List<Member> getMembers();
 }
