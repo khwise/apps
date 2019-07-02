@@ -37,6 +37,10 @@ public class Member extends Auditable<Long> {
     @NotBlank
     private String password;
 
+    @Column(name = "salt")
+    @NotBlank
+    private String salt;
+
     @Convert(converter = MemberStatusCodeConverter.class)
     @Column(name = "status")
     @NotNull

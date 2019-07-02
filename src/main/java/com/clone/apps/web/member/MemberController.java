@@ -1,6 +1,6 @@
 package com.clone.apps.web.member;
 
-import com.clone.apps.global.codes.MemberStatusCode;
+import com.clone.apps.business.member.MemberService;
 import com.clone.apps.global.response.DefaultResponse;
 import com.clone.apps.global.response.SuccessCode;
 import com.clone.apps.persistence.MemberRepositoryService;
@@ -8,12 +8,15 @@ import com.clone.apps.persistence.entity.member.Member;
 import com.clone.apps.web.BaseWebController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.time.LocalDate;
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -24,25 +27,24 @@ public class MemberController implements BaseWebController {
 
     private final Logger log = LoggerFactory.getLogger(MemberController.class);
 
+    private MemberService memberService;
     private MemberRepositoryService memberRepositoryService;
 
     @Autowired
-    public MemberController(MemberRepositoryService memberRepositoryService) {
+    public MemberController(final MemberRepositoryService memberRepositoryService,
+                            final MemberService memberService) {
         this.memberRepositoryService = memberRepositoryService;
+        this.memberService = memberService;
     }
 
     @PostMapping("/member")
-    public DefaultResponse<Member> saveMember() {
-        Member member = memberRepositoryService.save(Member
-                .builder()
-                .id("test-account1")
-                .password("1234")
-                .status(MemberStatusCode.ACTIVATED)
-                .lastPasswordChangedDate(LocalDate.now())
-                .loginFailedCount(0)
-                .build()
-        );
+    public DefaultResponse<Member> saveMember(@RequestBody @Valid MemberRequest request, BindingResult result) {
+        checkBindings(result);
 
+        Member member = new Member();
+        BeanUtils.copyProperties(request, member);
+
+        member = memberService.save(member);
         return DefaultResponse.success(SuccessCode.CREATED, member);
     }
 
