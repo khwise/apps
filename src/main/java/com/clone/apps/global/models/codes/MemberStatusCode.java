@@ -1,4 +1,4 @@
-package com.clone.apps.global.codes;
+package com.clone.apps.global.models.codes;
 
 import lombok.Getter;
 

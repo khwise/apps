@@ -1,7 +1,6 @@
 package com.clone.apps.business.member;
 
-import com.clone.apps.global.codes.MemberStatusCode;
-import com.clone.apps.global.utils.DateUtils;
+import com.clone.apps.global.models.codes.MemberStatusCode;
 import com.clone.apps.global.utils.encypt.SHA256Helper;
 import com.clone.apps.global.utils.encypt.SaltGenerator;
 import com.clone.apps.persistence.MemberRepositoryService;

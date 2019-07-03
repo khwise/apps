@@ -1,8 +1,8 @@
 package com.clone.apps.web.member;
 
 import com.clone.apps.business.member.MemberService;
-import com.clone.apps.global.response.DefaultResponse;
-import com.clone.apps.global.response.SuccessCode;
+import com.clone.apps.global.models.response.DefaultResponse;
+import com.clone.apps.global.models.response.SuccessCode;
 import com.clone.apps.persistence.MemberRepositoryService;
 import com.clone.apps.persistence.entity.member.Member;
 import com.clone.apps.web.BaseWebController;

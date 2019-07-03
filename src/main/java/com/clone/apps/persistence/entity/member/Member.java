@@ -1,6 +1,6 @@
 package com.clone.apps.persistence.entity.member;
 
-import com.clone.apps.global.codes.MemberStatusCode;
+import com.clone.apps.global.models.codes.MemberStatusCode;
 import com.clone.apps.persistence.convert.MemberStatusCodeConverter;
 import com.clone.apps.persistence.entity.Auditable;
 import lombok.AllArgsConstructor;

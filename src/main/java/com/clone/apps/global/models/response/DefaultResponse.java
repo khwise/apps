@@ -1,4 +1,4 @@
-package com.clone.apps.global.response;
+package com.clone.apps.global.models.response;
 
 import lombok.Data;
 

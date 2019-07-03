@@ -1,6 +1,6 @@
 package com.clone.apps.persistence;
 
-import com.clone.apps.global.codes.MemberStatusCode;
+import com.clone.apps.global.models.codes.MemberStatusCode;
 import com.clone.apps.persistence.entity.member.Member;
 import com.clone.apps.persistence.repository.MemberRepository;
 import org.junit.Before;
