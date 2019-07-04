@@ -27,11 +27,12 @@ public class Member extends Auditable<Long> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "member_no")
     private Long memberNo;
 
-    @Column(name = "id")
+    @Column(name = "member_id")
     @NotBlank
-    private String id;
+    private String memberId;
 
     @Column(name = "password")
     @NotBlank

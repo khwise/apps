@@ -1,5 +1,7 @@
 package com.clone.apps.business.member;
 
+import com.clone.apps.global.annotations.UniqueValidation;
+import com.clone.apps.global.service.UniqueMemberIdValidator;
 import com.clone.apps.global.models.codes.MemberStatusCode;
 import com.clone.apps.global.utils.encypt.SHA256Helper;
 import com.clone.apps.global.utils.encypt.SaltGenerator;
@@ -28,6 +30,7 @@ public class MemberServiceImpl implements MemberService {
         this.memberRepositoryService = memberRepositoryService;
     }
 
+    @UniqueValidation(executor = UniqueMemberIdValidator.class)
     @Override
     public Member save(Member member) {
 

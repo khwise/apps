@@ -10,9 +10,7 @@ import java.util.List;
 
 /**
  * Created by kh.jin on 2019. 6. 27.
- * DAO 레이어
- * 캐싱 등을 적용할 수 있다.
- *
+ * MemberRepository.class, MemberMapper.class 를 제어할 수 있는 Service Repository
  */
 
 @Component
@@ -29,12 +27,12 @@ public class MemberRepositoryServiceImpl implements MemberRepositoryService {
     }
 
     @Override
-    public Member getOne(Long id) {
+    public Member findOne(Long id) {
         return repository.getOne(id);
     }
 
     @Override
-    public List<Member> getAll() {
+    public List<Member> findAll() {
         return repository.findAll();
     }
 
@@ -51,6 +49,11 @@ public class MemberRepositoryServiceImpl implements MemberRepositoryService {
     @Override
     public void delete(Long id) {
         repository.deleteById(id);
+    }
+
+    @Override
+    public Member findByMemberId(String id) {
+        return repository.findByMemberId(id);
     }
 
     @Override

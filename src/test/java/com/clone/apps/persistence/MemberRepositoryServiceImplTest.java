@@ -40,7 +40,7 @@ public class MemberRepositoryServiceImplTest {
     public void setup() {
         member = Member
                 .builder()
-                .id("test-account1")
+                .memberId("test-account1")
                 .password("1234")
                 .status(MemberStatusCode.ACTIVATED)
                 .lastPasswordChangedDate(LocalDate.now())
@@ -51,8 +51,8 @@ public class MemberRepositoryServiceImplTest {
     @Test
     public void test_save() {
         Member saveMember = em.persist(member);
-        Member findMember = em.find(Member.class, saveMember.getId());
+        Member findMember = em.find(Member.class, saveMember.getMemberId());
 
-        assertThat(saveMember.getId()).isEqualTo(findMember.getId());
+        assertThat(saveMember.getMemberId()).isEqualTo(findMember.getMemberId());
     }
 }

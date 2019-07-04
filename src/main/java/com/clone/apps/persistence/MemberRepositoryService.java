@@ -10,15 +10,17 @@ import java.util.List;
  */
 public interface MemberRepositoryService {
 
-    Member getOne(Long id);
+    Member findOne(Long id);
 
-    List<Member> getAll();
+    List<Member> findAll();
 
     Member save(Member member);
 
     Member update(Member member);
 
     void delete(Long id);
+
+    Member findByMemberId(String memberId);
 
     List<Member> getMembers();
 }

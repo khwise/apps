@@ -2,6 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.clone.apps.persistence.mapper.MemberMapper">
     <select id="selectMembers" resultType="Member">
-        SELECT member_no, id, password FROM tb_member
+        SELECT member_no, member_id, password FROM tb_member
     </select>
 </mapper>

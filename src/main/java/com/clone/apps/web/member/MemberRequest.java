@@ -11,9 +11,9 @@ import javax.validation.constraints.NotEmpty;
 @Data
 public class MemberRequest {
 
-    @JsonProperty("id")
+    @JsonProperty("member_id")
     @NotEmpty
-    private String id;
+    private String memberId;
 
     @JsonProperty("password")
     @NotEmpty
