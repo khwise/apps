@@ -7,10 +7,10 @@ spring:
       username: hope
       password: 1234
       driver-class-name: com.mysql.cj.jdbc.Driver
-config:
-  hibernate:
-    hbm2ddl-auto: none
-    show-sql: true
-    format_sql: true
-    dialect: org.hibernate.dialect.MySQL5Dialect
-
+  servlet:
+    multipart:
+      max-file-size: 1MB
+      max-request-size: 10MB
+      file-size-threshold: 1MB
+properties:
+  file-path: /uploads
