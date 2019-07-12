@@ -33,26 +33,27 @@ public class ErrorResponse {
     }
 
     /**
-     * 대부분의 예외 발생 시 응답할 Response
-     * @param errorCode
+     *
+     * @param code
+     * @param message
      * @return
      */
-    public static ErrorResponse of(ErrorCode errorCode) {
+    public static ErrorResponse of(String code, String message) {
         ErrorResponse response = new ErrorResponse();
-        response.code = errorCode.getCode();
-        response.message = errorCode.getMessage();
+        response.code = code;
+        response.message = message;
         return response;
     }
 
-    // TODO : BindingResult 에 대한 파악이 더 필요함.
     /**
-     * BadRequestException 에서 사용될 예정
-     * @param errorCode
+     * BadRequestException 용 Response
+     * @param code
+     * @param message
      * @param bindingResult
      * @return
      */
-    public static ErrorResponse of(ErrorCode errorCode, BindingResult bindingResult) {
-        ErrorResponse response = ErrorResponse.of(errorCode);
+    public static ErrorResponse of(String code, String message, BindingResult bindingResult) {
+        ErrorResponse response = ErrorResponse.of(code, message);
         List<ErrorItem> errorItems = new ArrayList<>();
         for (FieldError error : bindingResult.getFieldErrors()) {
             ErrorItem errorItem = new ErrorItem();

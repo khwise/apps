@@ -18,13 +18,8 @@ import java.lang.reflect.Method;
 public class UniqueValidationAspect {
 
     @Before("@annotation(com.clone.apps.global.annotations.UniqueValidation)")
-    public void handle(JoinPoint p) throws Exception {
+    public void handle(JoinPoint p) {
         Method ms = ((MethodSignature) p.getSignature()).getMethod();
-
-        if (!ms.isAnnotationPresent(UniqueValidation.class)) {
-            // todo : exception.
-        }
-
         UniqueValidator bean = (UniqueValidator) BeanUtils.getBean(ms.getAnnotation(UniqueValidation.class).executor());
         bean.valid(p.getArgs()[0]);
     }

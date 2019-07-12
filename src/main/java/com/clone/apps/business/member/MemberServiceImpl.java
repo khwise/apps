@@ -33,9 +33,6 @@ public class MemberServiceImpl implements MemberService {
     @UniqueValidation(executor = UniqueMemberIdValidator.class)
     @Override
     public Member save(Member member) {
-
-        // todo : ID 중복 체크 관련 AOP 만들기.
-
         //salt 생성
         String salt = SaltGenerator.generate();
         log.debug("salt : {}", salt);
@@ -46,7 +43,7 @@ public class MemberServiceImpl implements MemberService {
             member.setSalt(salt);
         } catch (NoSuchAlgorithmException e) {
             log.error("An error occurred during password encryption.");
-            // todo : exception 처리
+            throw new RuntimeException("패스워드 생성");
         }
 
         // Default 값 설정

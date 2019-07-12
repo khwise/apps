@@ -11,9 +11,22 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class GlobalExceptionHandler {
     private final Logger log = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
+    @ExceptionHandler(BusinessException.class)
+    protected ResponseEntity<ErrorResponse> handleBusinessException(BusinessException e) {
+        log.debug("[exception handle] Business Exception.");
+        return new ResponseEntity<>(ErrorResponse.of(e.getCode(), e.getMessage()), HttpStatus.OK);
+    }
+
     @ExceptionHandler(BadRequestException.class)
     protected ResponseEntity<ErrorResponse> handleBadRequestException(BadRequestException e) {
         log.debug("[exception handle] Bad Request.");
-        return new ResponseEntity<>(ErrorResponse.of(ErrorCode.BAD_REQUEST, e.getBindingResult()), HttpStatus.OK);
+        return new ResponseEntity<>(ErrorResponse.of(e.getCode(), e.getMessage(), e.getBindingResult()), HttpStatus.OK);
+    }
+
+    @ExceptionHandler(RuntimeException.class)
+    protected ResponseEntity<ErrorResponse> handleRuntimeException(RuntimeException e) {
+        log.debug("[exception handle] Bad Request.");
+        ErrorCode errorCode = ErrorCode.INTERNAL_SERVER_ERROR;
+        return new ResponseEntity<>(ErrorResponse.of(errorCode.getCode(), String.format(errorCode.getMessage(), e.getMessage())), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
