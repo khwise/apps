@@ -1,4 +1,16 @@
 package com.clone.apps.global.errors;
 
-public class BusinessException extends RuntimeException {
+import lombok.EqualsAndHashCode;
+
+@EqualsAndHashCode(callSuper = false)
+public class BusinessException extends AppsException {
+
+    public BusinessException(String code, String message) {
+        super(code, message);
+    }
+
+    @Override
+    public synchronized Throwable fillInStackTrace() {
+        return this;
+    }
 }

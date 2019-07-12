@@ -6,9 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
 @SpringBootApplication
-@EnableConfigurationProperties ({
-        PropertyService.class
-})
+@EnableConfigurationProperties({PropertyService.class})
 public class AppsApplication {
 
     public static void main(String[] args) {

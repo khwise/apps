@@ -13,4 +13,4 @@ spring:
       max-request-size: 10MB
       file-size-threshold: 1MB
 properties:
-  file-path: /uploads
+  file-path: ./uploads

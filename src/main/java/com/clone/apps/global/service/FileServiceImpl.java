@@ -1,6 +1,12 @@
 package com.clone.apps.global.service;
 
+import com.clone.apps.global.errors.AppsException;
+import com.clone.apps.global.errors.BusinessException;
+import com.clone.apps.global.errors.ErrorCode;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
@@ -19,56 +25,57 @@ import java.nio.file.StandardCopyOption;
  */
 @Service
 public class FileServiceImpl implements FileService {
-
-    // private PropertyService propertyService;
+    private final Logger log = LoggerFactory.getLogger(FileServiceImpl.class);
 
     private final Path location;
 
     @Autowired
     public FileServiceImpl(PropertyService propertyService) {
         this.location = Paths.get(propertyService.getFilePath()).toAbsolutePath().normalize();
+        log.info("location: {}", location);
         try {
             Files.createDirectories(this.location);
         } catch(Exception e) {
-            //todo : 뭔가 비지니스 에러가 아닌 시스템 에러에 대한 처리가 필요하다.
-            throw new RuntimeException();
+            log.error(e.toString());
+            throw new AppsException(ErrorCode.INTERNAL_SERVER_ERROR.getCode(), ErrorCode.INTERNAL_SERVER_ERROR.getMessage());
         }
     }
 
     @Override
     public String upload(MultipartFile mFile) {
         String fileName = StringUtils.cleanPath(mFile.getOriginalFilename());
-
         try {
 
             if(fileName.contains("..")) {
-                //throw new FileStorageException("Sorry! Filename contains invalid path sequence " + fileName);
+                throw new AppsException(ErrorCode.INTERNAL_SERVER_ERROR.getCode(), ErrorCode.INTERNAL_SERVER_ERROR.getMessage());
             }
 
             Path targetLocation = this.location.resolve(fileName);
             Files.copy(mFile.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
 
             return fileName;
+
         } catch (IOException ex) {
-            throw new RuntimeException();
-            //throw new FileStorageException("Could not store file " + fileName + ". Please try again!", ex);
+            log.error("File I/O Error");
+            throw new AppsException(ErrorCode.INTERNAL_SERVER_ERROR.getCode(), ErrorCode.INTERNAL_SERVER_ERROR.getMessage());
         }
     }
-
 
     @Override
     public Resource download(String fileName) {
         try {
             Path filePath = this.location.resolve(fileName).normalize();
             Resource resource = new UrlResource(filePath.toUri());
-            if(resource.exists()) {
-                return resource;
-            } else {
-                throw new RuntimeException();
-            }
-        } catch (MalformedURLException e) {
-            throw new RuntimeException();
-        }
 
+            if(!resource.exists()) {
+                log.debug("File Not Found.");
+                throw new BusinessException(ErrorCode.NOT_FOUND.getCode(), String.format(ErrorCode.NOT_FOUND.getMessage(), "File"));
+            }
+
+            return resource;
+        } catch (MalformedURLException e) {
+            log.error("MalformedURLException.");
+            throw new AppsException(ErrorCode.INTERNAL_SERVER_ERROR.getCode(), ErrorCode.INTERNAL_SERVER_ERROR.getMessage());
+        }
     }
 }
