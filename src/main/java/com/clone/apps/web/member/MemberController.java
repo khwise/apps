@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.CollectionUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -37,15 +39,20 @@ public class MemberController implements BaseWebController {
         this.memberService = memberService;
     }
 
-    @PostMapping("/member")
+    @PostMapping("/members")
     public DefaultResponse<Member> saveMember(@RequestBody @Valid MemberRequest request, BindingResult result) {
+        log.info("request : {}", request);
         checkBindings(result);
 
-        Member member = new Member();
-        BeanUtils.copyProperties(request, member);
+        List<Member> members = new ArrayList<>();
+        request.getMembers().stream().forEach(m -> {
+            Member member = new Member();
+            BeanUtils.copyProperties(m, member);
+            members.add(member);
+        });
 
-        member = memberService.save(member);
-        return DefaultResponse.success(SuccessCode.CREATED, member);
+        //member = memberService.save(members);
+        return DefaultResponse.success(SuccessCode.CREATED, null);
     }
 
     @GetMapping("/members")
@@ -53,4 +60,6 @@ public class MemberController implements BaseWebController {
         List<Member> members = memberRepositoryService.getMembers();
         return DefaultResponse.success(SuccessCode.FIND_LIST, members);
     }
+
+    //@PostMapping("/members/{memberNo}/infomations")
 }

@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.security.NoSuchAlgorithmException;
 import java.time.LocalDate;
+import java.util.List;
 
 /**
  * Created by kh.jin on 2019. 7. 2.
@@ -32,27 +33,27 @@ public class MemberServiceImpl implements MemberService {
 
     @UniqueValidation(executor = UniqueMemberIdValidator.class)
     @Override
-    public Member save(Member member) {
+    public Member save(List<Member> member) {
         //salt 생성
         String salt = SaltGenerator.generate();
         log.debug("salt : {}", salt);
 
-        //password 변경
-        try {
-            member.setPassword(SHA256Helper.getInstance().encypt(member.getPassword(), salt));
-            member.setSalt(salt);
-        } catch (NoSuchAlgorithmException e) {
-            log.error("An error occurred during password encryption.");
-            throw new RuntimeException("패스워드 생성");
-        }
-
-        // Default 값 설정
-        member.setLastPasswordChangedDate(LocalDate.now());
-        member.setLoginFailedCount(0);
-        member.setStatus(MemberStatusCode.ACTIVATED);
-
-        Member savedMember = memberRepositoryService.save(member);
-        log.debug("saved member : {}", member);
-        return savedMember;
+//        //password 변경
+//        try {
+//            member.setPassword(SHA256Helper.getInstance().encypt(member.getPassword(), salt));
+//            member.setSalt(salt);
+//        } catch (NoSuchAlgorithmException e) {
+//            log.error("An error occurred during password encryption.");
+//            throw new RuntimeException("패스워드 생성");
+//        }
+//
+//        // Default 값 설정
+//        member.setLastPasswordChangedDate(LocalDate.now());
+//        member.setLoginFailedCount(0);
+//        member.setStatus(MemberStatusCode.ACTIVATED);
+//
+//        Member savedMember = memberRepositoryService.save(member);
+//        log.debug("saved member : {}", member);
+        return null;
     }
 }

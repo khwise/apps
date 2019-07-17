@@ -1,6 +1,7 @@
 package com.clone.apps.global.service;
 
 import com.clone.apps.global.errors.BusinessException;
+import com.clone.apps.global.errors.ErrorCode;
 import com.clone.apps.persistence.MemberRepositoryService;
 import com.clone.apps.persistence.entity.member.Member;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,7 @@ public class UniqueMemberIdValidator implements UniqueValidator {
     public void valid(Object param) {
         Member member = (Member) param;
         if (memberRepositoryService.findByMemberId(member.getMemberId()) != null) {
-            throw new BusinessException();
+            throw new BusinessException(ErrorCode.DUPLICATE_DATA.getCode(), ErrorCode.DUPLICATE_DATA.getMessage());
         }
     }
 }
