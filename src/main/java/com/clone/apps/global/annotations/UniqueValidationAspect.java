@@ -1,6 +1,6 @@
 package com.clone.apps.global.annotations;
 
-import com.clone.apps.global.service.UniqueValidator;
+import com.clone.apps.global.components.UniqueValidator;
 import com.clone.apps.global.utils.beans.BeanUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
@@ -17,10 +17,10 @@ import java.lang.reflect.Method;
 @Aspect
 public class UniqueValidationAspect {
 
-    @Before("@annotation(com.clone.apps.global.annotations.UniqueValidation)")
+    @Before("@annotation(com.clone.apps.global.annotations.Unique)")
     public void handle(JoinPoint p) {
         Method ms = ((MethodSignature) p.getSignature()).getMethod();
-        UniqueValidator bean = (UniqueValidator) BeanUtils.getBean(ms.getAnnotation(UniqueValidation.class).executor());
+        UniqueValidator bean = (UniqueValidator) BeanUtils.getBean(ms.getAnnotation(Unique.class).executor());
         bean.valid(p.getArgs()[0]);
     }
 }

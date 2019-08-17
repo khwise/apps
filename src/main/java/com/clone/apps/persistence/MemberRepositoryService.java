@@ -1,26 +1,38 @@
 package com.clone.apps.persistence;
 
 import com.clone.apps.persistence.entity.member.Member;
-
-import java.util.List;
+import com.clone.apps.persistence.entity.member.MemberAuthentication;
+import com.clone.apps.persistence.repository.MemberAuthenticationRepository;
+import com.clone.apps.persistence.repository.MemberRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  * Created by kh.jin on 2019. 6. 27.
- *
  */
-public interface MemberRepositoryService {
 
-    Member findOne(Long id);
+@Component
+public class MemberRepositoryService {
 
-    List<Member> findAll();
+    private final Logger log = LoggerFactory.getLogger(MemberRepositoryService.class);
 
-    Member save(Member member);
+    @Autowired
+    private MemberRepository memberRepository;
 
-    Member update(Member member);
+    @Autowired
+    private MemberAuthenticationRepository memberAuthenticationRepository;
 
-    void delete(Long id);
+    public Member save(Member member) {
+        memberRepository.save(member);
+        log.info("member id : {}", member.getId());
+        member.getMemberAuthentication().setId(member.getId());
+        memberAuthenticationRepository.save(member.getMemberAuthentication());
+        return member;
+    }
 
-    Member findByMemberId(String memberId);
-
-    List<Member> getMembers();
+    public Member findByEmail(String email) {
+        return memberRepository.findByEmail(email);
+    }
 }

@@ -1,25 +1,26 @@
 package com.clone.apps.web.member;
 
 import com.clone.apps.business.member.MemberService;
-import com.clone.apps.global.models.response.DefaultResponse;
-import com.clone.apps.global.models.response.SuccessCode;
+import com.clone.apps.global.codes.MemberStatusCode;
+import com.clone.apps.global.utils.encypt.SHA256Helper;
+import com.clone.apps.global.utils.encypt.SaltGenerator;
 import com.clone.apps.persistence.MemberRepositoryService;
 import com.clone.apps.persistence.entity.member.Member;
+import com.clone.apps.persistence.entity.member.MemberAuthentication;
 import com.clone.apps.web.BaseWebController;
+import com.clone.apps.web.DefaultResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.CollectionUtils;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.List;
+import java.security.NoSuchAlgorithmException;
+import java.time.LocalDate;
 
 /**
  * Created by kh.jin on 2019. 6. 27.
@@ -33,33 +34,32 @@ public class MemberController implements BaseWebController {
     private MemberRepositoryService memberRepositoryService;
 
     @Autowired
-    public MemberController(final MemberRepositoryService memberRepositoryService,
-                            final MemberService memberService) {
+    public MemberController(@Qualifier("memberRepositoryService") final MemberRepositoryService memberRepositoryService,
+                            @Qualifier("memberServiceImpl") final MemberService memberService) {
         this.memberRepositoryService = memberRepositoryService;
         this.memberService = memberService;
     }
 
     @PostMapping("/members")
-    public DefaultResponse<Member> saveMember(@RequestBody @Valid MemberRequest request, BindingResult result) {
-        log.info("request : {}", request);
+    public DefaultResponse<Member> saveMember(@RequestBody @Valid MemberRegistrationRequest request, BindingResult result) throws NoSuchAlgorithmException {
         checkBindings(result);
 
-        List<Member> members = new ArrayList<>();
-        request.getMembers().stream().forEach(m -> {
-            Member member = new Member();
-            BeanUtils.copyProperties(m, member);
-            members.add(member);
-        });
+        Member member = request.convertMember();
+        final String salt = SaltGenerator.generate();
+        final String password = SHA256Helper.getInstance().encypt(request.getPassword(), salt);
+        log.debug("salt : {}, password : {}, password size : {}", salt, password, password.length());
+        // TODO : vo 레이어로 해당 내용 이용 시키자!
+        member.setMemberAuthentication(
+                MemberAuthentication
+                .builder()
+                .salt(salt)
+                .password(password)
+                .loginFailedCount(0)
+                .lastPasswordChangedDate(LocalDate.now())
+                .statusCode(MemberStatusCode.ACTIVATED)
+                .build());
 
-        //member = memberService.save(members);
-        return DefaultResponse.success(SuccessCode.CREATED, null);
+        Member savedMember = memberService.signUp(member);
+        return DefaultResponse.success(savedMember);
     }
-
-    @GetMapping("/members")
-    public DefaultResponse<List<Member>> getMembers() {
-        List<Member> members = memberRepositoryService.getMembers();
-        return DefaultResponse.success(SuccessCode.FIND_LIST, members);
-    }
-
-    //@PostMapping("/members/{memberNo}/infomations")
 }

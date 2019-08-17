@@ -1,7 +1,5 @@
 package com.clone.apps.persistence.entity.member;
 
-import com.clone.apps.global.models.codes.MemberStatusCode;
-import com.clone.apps.persistence.convert.MemberStatusCodeConverter;
 import com.clone.apps.persistence.entity.Auditable;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,14 +7,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import java.time.LocalDate;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 
 /**
- * Created by kh.jin on 2019. 6. 26.
+ * Created by kh.jin on 2019. 7. 15.
  */
-
 @Entity
 @Table(name = "tb_member")
 @Data
@@ -27,30 +23,32 @@ public class Member extends Auditable<Long> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "member_no")
-    private Long memberNo;
-
     @Column(name = "member_id")
-    @NotBlank
-    private String memberId;
+    private Long id;
 
-    @Column(name = "password")
-    @NotBlank
-    private String password;
+    @Column(name = "email")
+    @Email
+    private String email;
 
-    @Column(name = "salt")
-    @NotBlank
-    private String salt;
+    @Column(name = "member_nm")
+    @NotEmpty
+    private String name;
 
-    @Convert(converter = MemberStatusCodeConverter.class)
-    @Column(name = "status")
-    @NotNull
-    private MemberStatusCode status;
+    @Column(name = "use_lunar_calendar")
+    private String useLunarCalendar;
 
-    @Column(name = "login_failed_cnt")
-    @NotNull
-    private Integer loginFailedCount;
+    @Column(name = "birthday")
+    private String birthday;
 
-    @Column(name = "last_pwd_changed_date")
-    private LocalDate lastPasswordChangedDate;
+    @Column(name = "telecom_company_cd")
+    private String telecomCompanyCode;
+
+    @Column(name = "mobile_number")
+    private String mobileNumber;
+
+    @Column(name = "profile_image_url")
+    private String profileImageUrl;
+
+    @Transient
+    private MemberAuthentication memberAuthentication;
 }

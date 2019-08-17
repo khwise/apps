@@ -1,0 +1,18 @@
+create table tb_member_information
+(
+  member_id            varchar(45)                        not null
+    primary key,
+  member_name          varchar(100)                       not null,
+  use_lunar_calendar   char default 'N'                   null,
+  birthday             varchar(8)                         null,
+  telecom_company_code char(2)                            null,
+  mobile_number        varchar(11)                        null,
+  profile_image_url    varchar(512)                       null,
+  creator              int unsigned                       not null,
+  updater              int unsigned                       not null,
+  created_at           datetime default CURRENT_TIMESTAMP not null,
+  updated_at           datetime default CURRENT_TIMESTAMP not null,
+  constraint tb_member_information_tb_member_member_id_fk
+  foreign key (member_id) references tb_member (member_id)
+)
+  comment '회원 신상 정보';

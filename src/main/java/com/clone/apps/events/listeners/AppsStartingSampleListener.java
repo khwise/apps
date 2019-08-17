@@ -1,4 +1,4 @@
-package com.clone.apps.global.events.listeners;
+package com.clone.apps.events.listeners;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

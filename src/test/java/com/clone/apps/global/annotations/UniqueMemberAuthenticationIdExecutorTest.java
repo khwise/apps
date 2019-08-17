@@ -7,7 +7,7 @@ import static org.junit.Assert.*;
 /**
  * Created by kh.jin on 2019. 7. 3.
  */
-public class UniqueValidationMemberIdExecutorTest {
+public class UniqueMemberAuthenticationIdExecutorTest {
 
 
     @Test

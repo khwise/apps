@@ -1,6 +1,6 @@
 package com.clone.apps.persistence.convert;
 
-import com.clone.apps.global.models.codes.MemberStatusCode;
+import com.clone.apps.global.codes.MemberStatusCode;
 
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;

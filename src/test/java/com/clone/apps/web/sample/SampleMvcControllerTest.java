@@ -69,7 +69,7 @@ public class SampleMvcControllerTest {
         // then
         resultActions
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("result").isArray())
+                .andExpect(jsonPath("contents").isArray())
                 .andExpect(jsonPath("code").value("SF02"))
         ;
     }
@@ -86,8 +86,8 @@ public class SampleMvcControllerTest {
         resultActions
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("code").value("SF01"))
-                .andExpect(jsonPath("result.id").value("A"))
-                .andExpect(jsonPath("result.name").value("AAA"))
+                .andExpect(jsonPath("contents.id").value("A"))
+                .andExpect(jsonPath("contents.name").value("AAA"))
         ;
     }
 

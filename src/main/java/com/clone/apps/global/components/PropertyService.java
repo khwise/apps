@@ -1,4 +1,4 @@
-package com.clone.apps.global.service;
+package com.clone.apps.global.components;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -1,6 +1,6 @@
 package com.clone.apps.global.annotations;
 
-import com.clone.apps.global.service.UniqueValidator;
+import com.clone.apps.global.components.UniqueValidator;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -15,7 +15,7 @@ import java.lang.annotation.Target;
  */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface UniqueValidation {
+public @interface Unique {
 
     Class<? extends UniqueValidator> executor();
 }

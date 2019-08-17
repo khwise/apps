@@ -1,4 +1,4 @@
-package com.clone.apps.global.service;
+package com.clone.apps.global.components;
 
 /**
  * Created by kh.jin on 2019. 7. 3.

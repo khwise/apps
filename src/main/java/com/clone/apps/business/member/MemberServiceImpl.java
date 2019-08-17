@@ -1,20 +1,14 @@
 package com.clone.apps.business.member;
 
-import com.clone.apps.global.annotations.UniqueValidation;
-import com.clone.apps.global.service.UniqueMemberIdValidator;
-import com.clone.apps.global.models.codes.MemberStatusCode;
-import com.clone.apps.global.utils.encypt.SHA256Helper;
-import com.clone.apps.global.utils.encypt.SaltGenerator;
+import com.clone.apps.global.annotations.Unique;
+import com.clone.apps.global.components.EmailUniqueValidator;
 import com.clone.apps.persistence.MemberRepositoryService;
 import com.clone.apps.persistence.entity.member.Member;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.security.NoSuchAlgorithmException;
-import java.time.LocalDate;
-import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Created by kh.jin on 2019. 7. 2.
@@ -27,33 +21,15 @@ public class MemberServiceImpl implements MemberService {
     private MemberRepositoryService memberRepositoryService;
 
     @Autowired
-    public MemberServiceImpl(final MemberRepositoryService memberRepositoryService) {
+    public MemberServiceImpl(MemberRepositoryService memberRepositoryService) {
         this.memberRepositoryService = memberRepositoryService;
     }
 
-    @UniqueValidation(executor = UniqueMemberIdValidator.class)
+    @Transactional
+    @Unique(executor = EmailUniqueValidator.class)
     @Override
-    public Member save(List<Member> member) {
-        //salt 생성
-        String salt = SaltGenerator.generate();
-        log.debug("salt : {}", salt);
-
-//        //password 변경
-//        try {
-//            member.setPassword(SHA256Helper.getInstance().encypt(member.getPassword(), salt));
-//            member.setSalt(salt);
-//        } catch (NoSuchAlgorithmException e) {
-//            log.error("An error occurred during password encryption.");
-//            throw new RuntimeException("패스워드 생성");
-//        }
-//
-//        // Default 값 설정
-//        member.setLastPasswordChangedDate(LocalDate.now());
-//        member.setLoginFailedCount(0);
-//        member.setStatus(MemberStatusCode.ACTIVATED);
-//
-//        Member savedMember = memberRepositoryService.save(member);
-//        log.debug("saved member : {}", member);
-        return null;
+    public Member signUp(Member member) {
+        log.debug("[Save Member] - param : {}", member);
+        return memberRepositoryService.save(member);
     }
 }

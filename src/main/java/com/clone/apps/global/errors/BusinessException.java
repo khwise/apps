@@ -5,6 +5,10 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = false)
 public class BusinessException extends AppsException {
 
+    public BusinessException(ErrorCode err) {
+        super(err.getCode(), err.getMessage());
+    }
+
     public BusinessException(String code, String message) {
         super(code, message);
     }

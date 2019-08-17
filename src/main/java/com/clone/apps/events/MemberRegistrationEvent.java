@@ -1,4 +1,4 @@
-package com.clone.apps.global.events;
+package com.clone.apps.events;
 
 import org.springframework.context.ApplicationEvent;
 

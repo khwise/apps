@@ -1,6 +1,6 @@
-package com.clone.apps.global.events.listeners;
+package com.clone.apps.events.listeners;
 
-import com.clone.apps.global.events.MemberRegistrationEvent;
+import com.clone.apps.events.MemberRegistrationEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
 

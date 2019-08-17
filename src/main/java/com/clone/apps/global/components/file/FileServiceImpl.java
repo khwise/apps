@@ -1,12 +1,12 @@
-package com.clone.apps.global.service;
+package com.clone.apps.global.components.file;
 
+import com.clone.apps.global.components.PropertyService;
 import com.clone.apps.global.errors.AppsException;
 import com.clone.apps.global.errors.BusinessException;
 import com.clone.apps.global.errors.ErrorCode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;

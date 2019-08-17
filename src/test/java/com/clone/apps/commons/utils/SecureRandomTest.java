@@ -1,4 +1,4 @@
-package com.clone.apps.global.utils;
+package com.clone.apps.commons.utils;
 
 import org.junit.Test;
 import org.slf4j.Logger;

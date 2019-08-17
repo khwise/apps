@@ -1,7 +1,7 @@
 package com.clone.apps;
 
-import com.clone.apps.global.events.listeners.AppsStartedSampleListener;
-import com.clone.apps.global.service.PropertyService;
+import com.clone.apps.events.listeners.AppsStartingSampleListener;
+import com.clone.apps.global.components.PropertyService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -12,7 +12,7 @@ public class AppsApplication {
 
     public static void main(String[] args) {
         SpringApplication app = new SpringApplication(AppsApplication.class);
-        app.addListeners(new AppsStartedSampleListener());
+        app.addListeners(new AppsStartingSampleListener());
         app.run(args);
     }
 }
