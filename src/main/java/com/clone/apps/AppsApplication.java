@@ -1,7 +1,7 @@
 package com.clone.apps;
 
-import com.clone.apps.events.listeners.AppsStartingSampleListener;
-import com.clone.apps.global.components.PropertyService;
+import com.clone.apps.global.events.listeners.AppsStartingSampleListener;
+import com.clone.apps.global.commons.PropertyService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
