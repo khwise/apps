@@ -1,13 +1,16 @@
-package com.clone.apps.global.web;
+package com.clone.apps.global.web.response;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 /**
  * Created by kh.jin on 2019. 6. 23.
  */
-
-@Data
+@NoArgsConstructor
+@Getter
 public class DefaultResponse<T> {
+
+    // TODO : message 추가 ()
 
     private final static String DEFAULT_CODE = "SUCCESS";
 

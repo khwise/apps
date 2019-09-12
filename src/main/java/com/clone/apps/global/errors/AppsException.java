@@ -2,6 +2,7 @@ package com.clone.apps.global.errors;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.ToString;
 import org.springframework.validation.BindingResult;
 
 /**
@@ -9,17 +10,15 @@ import org.springframework.validation.BindingResult;
  * Apps 어플리케이션에서 RuntimeException.class 를 상속받는 최상위 개체입니다
  */
 @EqualsAndHashCode(callSuper = false)
+@ToString
 public class AppsException extends RuntimeException {
 
-    @Getter
-    private String code;
+    public AppsException() {
+        super();
+    }
 
-    @Getter
-    private String message;
-
-    public AppsException(String code, String message) {
-        this.code = code;
-        this.message = message;
+    public AppsException(String message) {
+        super(message);
     }
 
     @Override

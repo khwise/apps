@@ -14,19 +14,18 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(BusinessException.class)
     protected ResponseEntity<ErrorResponse> handleBusinessException(BusinessException e) {
         log.debug("[exception handle] Business Exception.");
-        return new ResponseEntity<>(ErrorResponse.of(e.getCode(), e.getMessage()), HttpStatus.OK);
+        return new ResponseEntity<>(ErrorResponse.of(e.getCode().name(), e.getCode().name()), HttpStatus.OK);
     }
 
     @ExceptionHandler(BadRequestException.class)
     protected ResponseEntity<ErrorResponse> handleBadRequestException(BadRequestException e) {
         log.debug("[exception handle] Bad Request.");
-        return new ResponseEntity<>(ErrorResponse.of(e.getCode(), e.getMessage(), e.getBindingResult()), HttpStatus.OK);
+        return new ResponseEntity<>(ErrorResponse.of(e.getCode().code, e.getBindingResult()), HttpStatus.OK);
     }
 
-    @ExceptionHandler(RuntimeException.class)
-    protected ResponseEntity<ErrorResponse> handleRuntimeException(RuntimeException e) {
-        log.debug("[exception handle] Bad Request.");
-        ErrorCode errorCode = ErrorCode.INTERNAL_SERVER_ERROR;
-        return new ResponseEntity<>(ErrorResponse.of(errorCode.getCode(), String.format(errorCode.getMessage(), e.getMessage())), HttpStatus.INTERNAL_SERVER_ERROR);
+    @ExceptionHandler(AppsException.class)
+    protected ResponseEntity<ErrorResponse> handleRuntimeException(AppsException e) {
+        log.debug("[exception handle] Apps Exception.");
+        return new ResponseEntity<>(ErrorResponse.of(ErrorCode.INTERNAL_SERVER_ERROR.code, e.getMessage()), HttpStatus.OK);
     }
 }

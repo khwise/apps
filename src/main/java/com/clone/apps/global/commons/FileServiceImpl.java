@@ -36,7 +36,7 @@ public class FileServiceImpl  {
             Files.createDirectories(this.location);
         } catch(Exception e) {
             log.error(e.toString());
-            throw new AppsException(ErrorCode.INTERNAL_SERVER_ERROR.getCode(), ErrorCode.INTERNAL_SERVER_ERROR.getMessage());
+            throw new AppsException("The directory creation failed.");
         }
     }
 
@@ -45,7 +45,7 @@ public class FileServiceImpl  {
         try {
 
             if(fileName.contains("..")) {
-                throw new AppsException(ErrorCode.INTERNAL_SERVER_ERROR.getCode(), ErrorCode.INTERNAL_SERVER_ERROR.getMessage());
+                throw new AppsException("Inaccessible route.");
             }
 
             Path targetLocation = this.location.resolve(fileName);
@@ -55,7 +55,7 @@ public class FileServiceImpl  {
 
         } catch (IOException ex) {
             log.error("File I/O Error");
-            throw new AppsException(ErrorCode.INTERNAL_SERVER_ERROR.getCode(), ErrorCode.INTERNAL_SERVER_ERROR.getMessage());
+            throw new AppsException("Occurred I/O exception.");
         }
     }
 
@@ -66,13 +66,13 @@ public class FileServiceImpl  {
 
             if(!resource.exists()) {
                 log.debug("File Not Found.");
-                throw new BusinessException(ErrorCode.NOT_FOUND.getCode(), String.format(ErrorCode.NOT_FOUND.getMessage(), "File"));
+                throw new AppsException(resource.getFilename() + " not found.");
             }
 
             return resource;
         } catch (MalformedURLException e) {
             log.error("MalformedURLException.");
-            throw new AppsException(ErrorCode.INTERNAL_SERVER_ERROR.getCode(), ErrorCode.INTERNAL_SERVER_ERROR.getMessage());
+            throw new AppsException("MalformedURLException.");
         }
     }
 }

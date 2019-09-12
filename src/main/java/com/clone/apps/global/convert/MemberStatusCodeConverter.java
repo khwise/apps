@@ -1,4 +1,4 @@
-package com.clone.apps.global.commons.convert;
+package com.clone.apps.global.convert;
 
 import com.clone.apps.global.commons.codes.MemberStatusCode;
 

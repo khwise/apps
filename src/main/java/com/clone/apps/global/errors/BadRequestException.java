@@ -16,7 +16,7 @@ public class BadRequestException extends BusinessException {
     private BindingResult bindingResult;
 
     public BadRequestException(BindingResult bindingResult) {
-        super(ErrorCode.BAD_REQUEST.getCode(), ErrorCode.BAD_REQUEST.getMessage());
+        super(ErrorCode.BAD_REQUEST);
         this.bindingResult = bindingResult;
     }
 

@@ -1,8 +1,6 @@
 package com.clone.apps.global.errors;
 
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 
@@ -17,19 +15,28 @@ import java.util.List;
  */
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Getter
 public class ErrorResponse {
 
+    @Getter
     private String code;
+    @Getter
     private String message;
+    @Getter
     private List<ErrorItem> errors;
 
-    @NoArgsConstructor(access = AccessLevel.PROTECTED)
-    @Getter
+    @AllArgsConstructor(access = AccessLevel.PROTECTED)
+    @Builder
     public static class ErrorItem {
+        @Getter
         private String field;
+        @Getter
         private String value;
+        @Getter
         private String reason;
+    }
+
+    public static ErrorResponse of(String code) {
+        return ErrorResponse.of(code, "Business Exception.");
     }
 
     /**
@@ -48,19 +55,20 @@ public class ErrorResponse {
     /**
      * BadRequestException 용 Response
      * @param code
-     * @param message
      * @param bindingResult
      * @return
      */
-    public static ErrorResponse of(String code, String message, BindingResult bindingResult) {
-        ErrorResponse response = ErrorResponse.of(code, message);
+    public static ErrorResponse of(String code, BindingResult bindingResult) {
+        ErrorResponse response = ErrorResponse.of(code);
         List<ErrorItem> errorItems = new ArrayList<>();
         for (FieldError error : bindingResult.getFieldErrors()) {
-            ErrorItem errorItem = new ErrorItem();
-            errorItem.field = error.getField();
-            errorItem.value = error.getCode();
-            errorItem.reason = error.getDefaultMessage();
-            errorItems.add(errorItem);
+            errorItems.add(
+                    ErrorItem.builder()
+                            .field(error.getField())
+                            .value(error.getCode())
+                            .reason(error.getDefaultMessage())
+                            .build()
+            );
         }
         response.errors = errorItems;
         return response;

@@ -1,9 +1,9 @@
 package com.clone.apps.global.commons.validator;
 
+import com.clone.apps.domain.member.repository.MemberRepository;
+import com.clone.apps.entity.member.Member;
 import com.clone.apps.global.errors.BusinessException;
 import com.clone.apps.global.errors.ErrorCode;
-import com.clone.apps.domain.member.service.MemberRepositoryService;
-import com.clone.apps.entity.member.Member;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,18 +18,18 @@ public class EmailUniqueValidator implements UniqueValidator {
 
     private final Logger log = LoggerFactory.getLogger(EmailUniqueValidator.class);
 
-    private MemberRepositoryService memberRepositoryService;
+    private MemberRepository memberRepository;
 
     @Autowired
-    public EmailUniqueValidator(final MemberRepositoryService memberRepositoryService) {
-        this.memberRepositoryService = memberRepositoryService;
+    public EmailUniqueValidator(final MemberRepository memberRepository) {
+        this.memberRepository = memberRepository;
     }
 
     @Override
     public void valid(Object param) {
         Member member = (Member) param;
         log.debug("[Email Unique Validation] - param : {}", param);
-        if (memberRepositoryService.findByEmail(member.getEmail()) != null) {
+        if (memberRepository.findByEmail(member.getEmail()) != null) {
             throw new BusinessException(ErrorCode.DUPLICATE_DATA);
         }
     }
