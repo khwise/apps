@@ -1,12 +1,12 @@
 package com.clone.apps.domain.login.service;
 
 import com.clone.apps.domain.login.web.LoginRequest;
+import com.clone.apps.domain.login.web.LoginResult;
 import com.clone.apps.domain.member.repository.MemberAuthenticationRepository;
 import com.clone.apps.domain.member.repository.MemberRepository;
 import com.clone.apps.domain.member.service.MemberBlockedService;
 import com.clone.apps.entity.member.Member;
 import com.clone.apps.entity.member.MemberAuthentication;
-import com.clone.apps.global.errors.BusinessException;
 import com.clone.apps.global.errors.LoginException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,9 +24,6 @@ import java.util.Optional;
 public class LoginService {
     private final Logger log = LoggerFactory.getLogger(LoginService.class);
 
-    // TODO : 프로퍼티로 처리
-    private final static int BLOCKED_CNT = 5;
-
     private MemberRepository memberRepository;
     private MemberAuthenticationRepository memberAuthenticationRepository;
     private MemberBlockedService memberBlockedService;
@@ -40,7 +37,7 @@ public class LoginService {
         this.memberBlockedService = memberBlockedService;
     }
 
-    public Member login(LoginRequest request) throws NoSuchAlgorithmException {
+    public LoginResult login(LoginRequest request) throws NoSuchAlgorithmException {
         Member member = memberRepository.findByEmail(request.getEmail());
         Optional.ofNullable(member).orElseThrow(LoginException::new);
         log.debug("member : {}", member);
@@ -50,17 +47,24 @@ public class LoginService {
         log.debug("member authentication : {}", authentication);
 
         if (!authentication.authenticate(request.getPassword())) {
-            authentication.incrementLoginFailedCount();
-            if (BLOCKED_CNT <= authentication.getLoginFailedCount()) {
-                memberBlockedService.blocked(authentication);
-            }
+            memberBlockedService.blocked(authentication);
             // TODO : History Table 생성 저장
-            throw new BusinessException();
+
+            return LoginResult
+                    .builder()
+                    .result(false)
+                    .failedCnt(authentication.getLoginFailedCount())
+                    .memberStatus(authentication.getStatusCode())
+                    .build();
         }
         authentication.initLoginFailedCount();
         memberAuthenticationRepository.save(authentication);
 
         // Login History
-        return member;
+        return LoginResult
+                .builder()
+                .result(true)
+                .member(member)
+                .build();
     }
 }

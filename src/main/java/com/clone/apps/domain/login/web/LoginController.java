@@ -30,10 +30,10 @@ public class LoginController implements BaseWebController {
     }
 
     @PostMapping(value = "/login")
-    public DefaultResponse<Member> login(@RequestBody @Valid final LoginRequest request) {
+    public DefaultResponse<LoginResult> login(@RequestBody @Valid final LoginRequest request) {
         try {
-            Member member = service.login(request);
-            return DefaultResponse.success(member);
+            LoginResult result = service.login(request);
+            return DefaultResponse.success(result);
         } catch (NoSuchAlgorithmException e) {
             log.debug("NoSuchAlgorithmException.");
             throw new AppsException();

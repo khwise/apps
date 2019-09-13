@@ -9,12 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 public abstract class AbstractMemberStatusService {
 
-    private MemberAuthenticationRepository repository;
-
     @Autowired
-    public AbstractMemberStatusService(final MemberAuthenticationRepository repository) {
-        this.repository = repository;
-    }
+    private MemberAuthenticationRepository repository;
 
     public void updateStatus(MemberAuthentication authentication) {
         repository.save(authentication);
