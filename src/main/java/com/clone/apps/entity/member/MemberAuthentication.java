@@ -1,6 +1,6 @@
 package com.clone.apps.entity.member;
 
-import com.clone.apps.global.commons.codes.MemberStatusCode;
+import com.clone.apps.domain.codes.enums.MemberStatusCode;
 import com.clone.apps.global.convert.MemberStatusCodeConverter;
 import com.clone.apps.entity.Auditable;
 import com.clone.apps.global.commons.utils.encypt.SHA256Helper;

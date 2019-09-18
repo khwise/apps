@@ -1,6 +1,6 @@
 package com.clone.apps.global.convert;
 
-import com.clone.apps.global.commons.codes.MemberStatusCode;
+import com.clone.apps.domain.codes.enums.MemberStatusCode;
 
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;

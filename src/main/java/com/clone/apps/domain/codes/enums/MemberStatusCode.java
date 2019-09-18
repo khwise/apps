@@ -1,4 +1,4 @@
-package com.clone.apps.global.commons.codes;
+package com.clone.apps.domain.codes.enums;
 
 import lombok.Getter;
 
@@ -13,7 +13,6 @@ import java.util.stream.Stream;
 
 @Getter
 public enum MemberStatusCode {
-
     ACTIVATED(1)
     ,
     INACTIVATED(2)

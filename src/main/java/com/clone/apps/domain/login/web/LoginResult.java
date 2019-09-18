@@ -1,7 +1,7 @@
 package com.clone.apps.domain.login.web;
 
 import com.clone.apps.entity.member.Member;
-import com.clone.apps.global.commons.codes.MemberStatusCode;
+import com.clone.apps.domain.codes.enums.MemberStatusCode;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
