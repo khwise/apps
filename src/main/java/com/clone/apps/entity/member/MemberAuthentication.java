@@ -1,10 +1,10 @@
 package com.clone.apps.entity.member;
 
-import com.clone.apps.domain.codes.enums.MemberStatusCode;
-import com.clone.apps.global.convert.MemberStatusCodeConverter;
-import com.clone.apps.entity.Auditable;
-import com.clone.apps.global.commons.utils.encypt.SHA256Helper;
-import com.clone.apps.global.commons.utils.encypt.SaltGenerator;
+import com.clone.apps.global.code.MemberStatusCode;
+import com.clone.apps.entity.member.convert.MemberStatusCodeConverter;
+import com.clone.apps.global.entity.Auditable;
+import com.clone.apps.global.common.utils.encypt.SHA256Helper;
+import com.clone.apps.global.common.utils.encypt.SaltGenerator;
 import com.clone.apps.global.errors.AppsException;
 import lombok.*;
 import org.slf4j.Logger;

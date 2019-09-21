@@ -1,6 +1,6 @@
 package com.clone.apps.entity.member;
 
-import com.clone.apps.entity.Auditable;
+import com.clone.apps.global.entity.Auditable;
 import lombok.*;
 
 import javax.persistence.*;
