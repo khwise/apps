@@ -1,4 +1,4 @@
-package com.clone.apps.global.entity;
+package com.clone.apps.global.persistence.entity;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;

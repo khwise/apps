@@ -1,11 +1,11 @@
-package com.clone.apps.domain.member.login.service;
+package com.clone.apps.domain.member.service;
 
-import com.clone.apps.domain.member.login.web.LoginRequest;
-import com.clone.apps.domain.member.login.web.LoginResult;
-import com.clone.apps.domain.member.login.persistence.repository.MemberAuthenticationRepository;
-import com.clone.apps.domain.member.login.persistence.repository.MemberRepository;
-import com.clone.apps.entity.member.Member;
-import com.clone.apps.entity.member.MemberAuthentication;
+import com.clone.apps.domain.member.persistence.entity.Member;
+import com.clone.apps.domain.member.persistence.entity.MemberAuthentication;
+import com.clone.apps.domain.member.persistence.repository.MemberAuthenticationRepository;
+import com.clone.apps.domain.member.persistence.repository.MemberRepository;
+import com.clone.apps.domain.member.web.LoginRequest;
+import com.clone.apps.domain.member.web.LoginResult;
 import com.clone.apps.global.errors.LoginException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

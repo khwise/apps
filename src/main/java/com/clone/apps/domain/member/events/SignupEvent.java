@@ -1,4 +1,4 @@
-package com.clone.apps.domain.member.signup.events;
+package com.clone.apps.domain.member.events;
 
 import lombok.Getter;
 

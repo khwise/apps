@@ -1,6 +1,6 @@
-package com.clone.apps.domain.member.login.web;
+package com.clone.apps.domain.member.web;
 
-import com.clone.apps.domain.member.login.service.LoginService;
+import com.clone.apps.domain.member.service.LoginService;
 import com.clone.apps.global.errors.AppsException;
 import com.clone.apps.global.web.BaseWebController;
 import com.clone.apps.global.web.response.DefaultResponse;

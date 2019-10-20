@@ -1,4 +1,4 @@
-package com.clone.apps.domain.member.login.web;
+package com.clone.apps.domain.member.web;
 
 import lombok.*;
 

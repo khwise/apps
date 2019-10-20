@@ -1,7 +1,7 @@
-package com.clone.apps.domain.member.login.service;
+package com.clone.apps.domain.member.service;
 
-import com.clone.apps.domain.member.login.persistence.repository.MemberAuthenticationRepository;
-import com.clone.apps.entity.member.MemberAuthentication;
+import com.clone.apps.domain.member.persistence.entity.MemberAuthentication;
+import com.clone.apps.domain.member.persistence.repository.MemberAuthenticationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**

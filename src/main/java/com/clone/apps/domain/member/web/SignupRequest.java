@@ -1,4 +1,4 @@
-package com.clone.apps.domain.member.signup.web;
+package com.clone.apps.domain.member.web;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;

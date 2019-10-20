@@ -1,4 +1,4 @@
-package com.clone.apps.entity.member.convert;
+package com.clone.apps.domain.member.persistence.entity.convert;
 
 import com.clone.apps.global.code.MemberStatusCode;
 

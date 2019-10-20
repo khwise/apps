@@ -1,7 +1,11 @@
-package com.clone.apps.entity.member;
+package com.clone.apps.domain.member.persistence.entity;
 
-import com.clone.apps.global.entity.Auditable;
-import lombok.*;
+
+import com.clone.apps.global.persistence.entity.Auditable;
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -68,5 +72,4 @@ public class Member extends Auditable<Long> {
         this.mobileNumber = mobileNumber;
         this. profileImageUrl = profileImageUrl;
     }
-
 }

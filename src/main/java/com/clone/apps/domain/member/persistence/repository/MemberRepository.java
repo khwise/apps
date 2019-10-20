@@ -1,6 +1,6 @@
-package com.clone.apps.domain.member.login.persistence.repository;
+package com.clone.apps.domain.member.persistence.repository;
 
-import com.clone.apps.entity.member.Member;
+import com.clone.apps.domain.member.persistence.entity.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

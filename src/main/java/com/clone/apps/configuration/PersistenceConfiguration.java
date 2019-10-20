@@ -104,7 +104,7 @@ public class PersistenceConfiguration {
         factory.setDataSource(dataSource);
         factory.setMapperLocations(applicationContext.getResources("classpath:/mapper/**/*.xml"));
         factory.setVfs(SpringBootVFS.class);
-        factory.setTypeAliasesPackage("com.clone.apps.entity");
+        factory.setTypeAliasesPackage("com.clone.apps");
         return factory.getObject();
     }
 

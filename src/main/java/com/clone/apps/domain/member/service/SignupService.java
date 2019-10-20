@@ -1,11 +1,11 @@
-package com.clone.apps.domain.member.signup.service;
+package com.clone.apps.domain.member.service;
 
-import com.clone.apps.domain.member.login.persistence.repository.MemberAuthenticationRepository;
-import com.clone.apps.domain.member.login.persistence.repository.MemberRepository;
-import com.clone.apps.domain.member.signup.events.SignupEvent;
-import com.clone.apps.domain.member.signup.web.SignupRequest;
-import com.clone.apps.entity.member.Member;
-import com.clone.apps.entity.member.MemberAuthentication;
+import com.clone.apps.domain.member.events.SignupEvent;
+import com.clone.apps.domain.member.persistence.entity.Member;
+import com.clone.apps.domain.member.persistence.entity.MemberAuthentication;
+import com.clone.apps.domain.member.persistence.repository.MemberAuthenticationRepository;
+import com.clone.apps.domain.member.persistence.repository.MemberRepository;
+import com.clone.apps.domain.member.web.SignupRequest;
 import com.clone.apps.global.errors.BusinessException;
 import com.clone.apps.global.errors.ErrorCode;
 import org.slf4j.Logger;
@@ -28,12 +28,14 @@ public class SignupService implements ApplicationEventPublisherAware {
     private final Logger log = LoggerFactory.getLogger(SignupService.class);
 
     private MemberRepository memberRepository;
+
     private MemberAuthenticationRepository memberAuthenticationRepository;
 
     private ApplicationEventPublisher publisher;
 
     @Autowired
-    public SignupService(final MemberRepository memberRepository, final MemberAuthenticationRepository memberAuthenticationRepository) {
+    public SignupService(final MemberRepository memberRepository,
+                         final MemberAuthenticationRepository memberAuthenticationRepository) {
         this.memberRepository = memberRepository;
         this.memberAuthenticationRepository = memberAuthenticationRepository;
     }

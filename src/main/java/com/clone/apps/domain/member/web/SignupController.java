@@ -1,7 +1,7 @@
-package com.clone.apps.domain.member.signup.web;
+package com.clone.apps.domain.member.web;
 
-import com.clone.apps.domain.member.signup.service.SignupService;
-import com.clone.apps.entity.member.Member;
+import com.clone.apps.domain.member.persistence.entity.Member;
+import com.clone.apps.domain.member.service.SignupService;
 import com.clone.apps.global.web.BaseWebController;
 import com.clone.apps.global.web.response.DefaultResponse;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,6 +1,6 @@
-package com.clone.apps.domain.member.login.web;
+package com.clone.apps.domain.member.web;
 
-import com.clone.apps.entity.member.Member;
+import com.clone.apps.domain.member.persistence.entity.Member;
 import com.clone.apps.global.code.MemberStatusCode;
 import lombok.Builder;
 import lombok.Getter;

@@ -1,6 +1,6 @@
-package com.clone.apps.domain.member.login.persistence.mapper;
+package com.clone.apps.domain.member.persistence.mapper;
 
-import com.clone.apps.entity.member.MemberAuthentication;
+import com.clone.apps.domain.member.persistence.entity.MemberAuthentication;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

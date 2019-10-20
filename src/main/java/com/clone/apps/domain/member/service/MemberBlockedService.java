@@ -1,6 +1,6 @@
-package com.clone.apps.domain.member.login.service;
+package com.clone.apps.domain.member.service;
 
-import com.clone.apps.entity.member.MemberAuthentication;
+import com.clone.apps.domain.member.persistence.entity.MemberAuthentication;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;

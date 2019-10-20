@@ -1,4 +1,4 @@
-package com.clone.apps.domain.member.signup.events;
+package com.clone.apps.domain.member.events;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
