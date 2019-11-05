@@ -2,8 +2,8 @@ package com.clone.apps.domain.member.persistence.entity;
 
 import com.clone.apps.domain.member.persistence.entity.convert.MemberStatusCodeConverter;
 import com.clone.apps.global.code.MemberStatusCode;
-import com.clone.apps.global.common.utils.encypt.SHA256Helper;
-import com.clone.apps.global.common.utils.encypt.SaltGenerator;
+import com.clone.commons.utils.encypt.SHA256Helper;
+import com.clone.commons.utils.encypt.SaltGenerator;
 import com.clone.apps.global.errors.AppsException;
 import com.clone.apps.global.persistence.entity.Auditable;
 import lombok.*;

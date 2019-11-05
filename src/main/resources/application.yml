@@ -9,10 +9,40 @@ spring:
       username: hope
       password: 1234
       driver-class-name: com.mysql.cj.jdbc.Driver
+  social:
+    kakao:
+      client_id: 2089a8e74884fa45294d9c6bd7b2813d # 앱생성시 받은 REST API 키
+      redirect: /social/login/kakao
+      url:
+        login: https://kauth.kakao.com/oauth/authorize
+        token: https://kauth.kakao.com/oauth/token
+        profile: https://kapi.kakao.com/v2/user/me
+    facebook:
+      client_id: 888902158151434
+      client_secret: 4296af177795b27b9c4493e6f8676821
+      accessTokenUri: https://graph.facebook.com/oauth/access_token
+      userAuthorizationUri: https://www.facebook.com/dialog/oauth
+      tokenName: oauth_token
+      authenticationScheme: query
+      clientAuthenticationScheme: form
+      resource:
+        userInfoUri: https://graph.facebook.com/me
+    naver:
+      client_id: nhFNrrMp14oy1lm48JXo
+      client_secret: ZJ8Z5IzbKu
+      redirect: /social/login/naver
+      session_state: oauth_state
+      url:
+        token: https://nid.naver.com/oauth2.0/token?grant_type=authorization_code
+        login: https://nid.naver.com/oauth2.0/authorize?response_type=code
+        profile: https://openapi.naver.com/v1/nid/me
+  jwt:
+    secret: govlepel@$&
   servlet:
     multipart:
       max-file-size: 1MB
       max-request-size: 10MB
       file-size-threshold: 1MB
+
 properties:
   file-path: ./uploads
