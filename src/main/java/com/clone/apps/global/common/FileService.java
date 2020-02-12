@@ -1,6 +1,6 @@
 package com.clone.apps.global.common;
 
-import com.clone.apps.global.errors.AppsException;
+import com.clone.apps.commons.errors.AppsException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

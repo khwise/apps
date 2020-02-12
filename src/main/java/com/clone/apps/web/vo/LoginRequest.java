@@ -12,13 +12,11 @@ import javax.validation.constraints.NotBlank;
 @Getter
 @EqualsAndHashCode(callSuper = false)
 @ToString
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 public class LoginRequest {
-    
     @Email
     private String email;
 
     @NotBlank
     private String password;
-
 }

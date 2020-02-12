@@ -1,7 +1,5 @@
 package com.clone.apps.web.api;
 
-import lombok.Data;
-
 /**
  * Created by kh.jin on 2019. 11. 5.
  */

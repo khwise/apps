@@ -1,7 +1,7 @@
 package com.clone.apps.web.api.external;
 
-import com.clone.apps.domain.member.persistence.entity.Member;
-import com.clone.apps.domain.member.service.SignupService;
+import com.clone.apps.domains.members.persistences.entity.Member;
+import com.clone.apps.domains.members.services.SignupService;
 import com.clone.apps.web.api.BaseWebController;
 import com.clone.apps.web.DefaultResponse;
 import com.clone.apps.web.vo.SignupRequest;

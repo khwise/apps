@@ -1,6 +1,6 @@
 package com.clone.apps.web.api;
 
-import com.clone.apps.global.errors.BadRequestException;
+import com.clone.apps.commons.errors.BadRequestException;
 import org.springframework.validation.BindingResult;
 
 public interface BaseWebController {

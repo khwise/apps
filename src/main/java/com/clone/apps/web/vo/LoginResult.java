@@ -1,7 +1,7 @@
 package com.clone.apps.web.vo;
 
-import com.clone.apps.domain.member.persistence.entity.Member;
-import com.clone.apps.global.code.MemberStatusCode;
+import com.clone.apps.domains.members.persistences.entity.Member;
+import com.clone.apps.commons.code.MemberStatusCode;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

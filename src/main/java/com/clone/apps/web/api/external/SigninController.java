@@ -1,7 +1,7 @@
 package com.clone.apps.web.api.external;
 
-import com.clone.apps.domain.member.service.LoginService;
-import com.clone.apps.global.errors.AppsException;
+import com.clone.apps.domains.members.services.LoginService;
+import com.clone.apps.commons.errors.AppsException;
 import com.clone.apps.web.DefaultResponse;
 import com.clone.apps.web.api.ExternalContextController;
 import com.clone.apps.web.vo.LoginRequest;

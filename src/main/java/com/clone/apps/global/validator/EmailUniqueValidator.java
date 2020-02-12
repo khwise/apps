@@ -1,9 +1,9 @@
 package com.clone.apps.global.validator;
 
-import com.clone.apps.domain.member.persistence.entity.Member;
-import com.clone.apps.domain.member.persistence.repository.MemberRepository;
-import com.clone.apps.global.errors.BusinessException;
-import com.clone.apps.global.errors.ErrorCode;
+import com.clone.apps.domains.members.persistences.entity.Member;
+import com.clone.apps.domains.members.persistences.repository.MemberRepository;
+import com.clone.apps.commons.errors.BusinessException;
+import com.clone.apps.commons.errors.ErrorCode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

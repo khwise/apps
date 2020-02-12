@@ -27,6 +27,7 @@ public class ArticleController implements ExternalContextController {
         articles.add(new Article(1,"A"));
         articles.add(new Article(2,"B"));
         articles.add(new Article(3,"C"));
+        log.debug("articles : {}", articles);
     }
 
 
